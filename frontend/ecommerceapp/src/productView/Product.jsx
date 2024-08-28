@@ -23,6 +23,8 @@ function Product() {
     axios.get('http://localhost:9679/product/getmaxpid')
       .then((res) => {
         setPid(res.data.length + 1);
+        console.log("length = " + res.data.length);
+
       })
       .catch(err => {
         alert(err.message);
@@ -31,7 +33,7 @@ function Product() {
     axios.get('http://localhost:9679/productCat/show')
       .then((res) => {
         setPCatgList(res.data);
-        console.log(pcatgList);
+        // console.log(pcatgList);
 
       })
       .catch(err => {
@@ -227,7 +229,12 @@ function Product() {
                 <td>{product.pprice}</td>
                 <td>{product.oprice}</td>
                 <td>
-                  {pcatgList.find(item => item.pcatgid === product.pcatgid)?.pcatgname || 'Unknown'}
+                  {pcatgList.map((item => {
+                    if (item.productId === product.pcatgid) {
+                      return item.productCatg;
+                    }
+                  }))}
+
                 </td>
                 <td>
                   <img src={`http://localhost:9679/product/getproductimage/${product.ppicname}`} alt="" width={100} height={100} />

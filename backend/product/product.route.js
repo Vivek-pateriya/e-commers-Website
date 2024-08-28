@@ -55,13 +55,21 @@ productRoute.get('/getproductimage/:picname', (req, res) => {
 
 
 // Get Maximum Product ID
-productRoute.route('/getmaxpid').get((req, res) => {
-  Product.find({}, 'pid').sort({ pid: -1 }).limit(1)
-    .then((products) => {
-      res.send(products);
-    })
-    .catch((err) => {
-      res.status(400).json({ 'error': 'Getting max pid from database failed', err });
-    });
+// productRoute.route('/getmaxpid').get((req, res) => {
+//   Product.find({}, 'pid').sort({ pid: -1 }).limit(1)
+//     .then((products) => {
+//       res.send(products);
+//     })
+//     .catch((err) => {
+//       res.status(400).json({ 'error': 'Getting max pid from database failed', err });
+//     });
+// });
+// Route to get max product ID
+productRoute.get('/getmaxpid', (req, res) => {
+  Product.find().then(result => {
+    res.send(result);
+  }).catch(err => {
+    res.send(err);
+  });
 });
 module.exports = productRoute;
