@@ -105,6 +105,24 @@ CityRouter.route('/toggle').put(async (req, res) => {
     res.status(500).send("Server error: " + err.message);
   }
 });
+CityRouter.get('/searchbyname/:ctname', (req, res) => {
+
+  City.findOne({ "ctname": req.params.ctname })
+    .then(result => res.send(result))
+    .catch(err => res.send(err));
+});
+CityRouter.get('/getall', (req, res) => {
+  City.find().then(result => {
+    res.send(result);
+  }).catch(err => {
+    res.send(err);
+  })
+})
+CityRouter.get('/showcitybystate/:stid', (req, res) => {
+  City.find({ "stid": req.params.stid })
+    .then(result => res.send(result))
+    .catch(err => res.send(err));
+});
 
 
 

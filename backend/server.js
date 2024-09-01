@@ -9,6 +9,10 @@ const stateRouter = require('./Admin/state.router');
 const productCat = require('./Admin/productCat.router');
 const product = require('./product/product.route');
 const customer = require('./Customer/customer.route');
+const paymentRoute = require('./payment');
+const venderRoute = require('./Vender/vender.routs');
+const adminRoute = require('./Admin/admin.route');
+
 app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -18,6 +22,9 @@ app.use('/state', stateRouter);
 app.use('/productCat', productCat);
 app.use('/product', product);
 app.use('/customer', customer);
+app.use('/payment', paymentRoute);
+app.use('/vender', venderRoute);
+app.use('/admin', adminRoute);
 
 
 mongoose.connect(config.URL).then(() => {

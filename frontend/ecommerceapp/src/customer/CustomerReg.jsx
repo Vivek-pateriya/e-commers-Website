@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import ReactDom from 'react-dom/client'
-import '../index.css';
+import './customer.css';
 
 function CustomerReg() {
   const [CUSerId, setCUserID] = useState("");
@@ -30,7 +30,7 @@ function CustomerReg() {
   }
   const handleStIdSelect = (evt) => {
     setStId(evt.target.value);
-    axios.get('http://localhost:9679/city/showcitybystate' + evt.target.value).then((res) => {
+    axios.get('http://localhost:9679/city/showcitybystate/' + evt.target.value).then((res) => {
       setctList(res.data);
     })
   }
@@ -56,14 +56,14 @@ function CustomerReg() {
     }).catch(err => {
       console.log(err);
     })
-    axios.get('http://localhost:9679/state/show').then((res) => {
+    axios.get('http://localhost:9679/state/show/').then((res) => {
       setstList(res.data);
     }).catch(err => {
       console.log(err);
     })
 
   }, [])
-  const handleRegsistration = () => {
+  const handleRegsistration = async () => {
     var obj = {
       CUSerId: CUSerId,
       CUserPass: CUserPass,
@@ -74,21 +74,10 @@ function CustomerReg() {
       CEmail: CEmail,
       CConatct: CConatct,
       CPicName: CPicName,
-      Cid: Cid
-
+      Cid: Cid,
+      CStatus: 0
     }
-    axios.post('http://localhost:9679/customer/regsiter', obj).then(res => {
-      console.log(res.data);
-
-    }).catch(err => {
-      console.log(err);
-    })
-
-
-  }
-
-  const handleSubmit = async (evt) => {
-    evt.preventDefault();
+    console.log(obj)
     const formData = new FormData();
     formData.append('file', image.data);
     const res = await fetch('http://localhost:9679/customer/savecustomerimage', {
@@ -104,8 +93,28 @@ function CustomerReg() {
         setstatus('FIle uploads failed')
       }
     }
-  };
+    axios.post('http://localhost:9679/customer/regsiter', obj).then(res => {
+      console.log(res.data);
+      if (res.data === 'regsistration succesfully') {
+        setCustomerName('');
+        setCUserID('');
+        setCUserPass('');
+        setStId('');
+        setCtId('');
+        setCAddress('');
+        setCEmail('');
+        setCConatct('');
+        setCPicName('');
+        setImage({ preview: '', data: '' });
+        setCid(Cid + 1)
+      }
 
+    }).catch(err => {
+      console.log(err);
+    })
+
+
+  }
   const handleChange = (evt) => {
     const selectedFile = evt.target.files[0];
     const imageURL = URL.createObjectURL(selectedFile);
@@ -138,31 +147,28 @@ function CustomerReg() {
             <td>State</td>
             <td>
               <select value={StId} onChange={handleStIdSelect}>
-                {
-                  stList.map((state, index) => (
-                    <option key={index} value={state.stid}>{state.stname}</option>
-                  ))
-                }
-
+                <option value="">Select State</option>
+                {stList.map((state, index) => (
+                  <option key={index} value={state.stid}>{state.stname}</option>
+                ))}
               </select>
             </td>
           </tr>
           <tr>
             <td>City</td>
             <td>
-              <select value={CtId} onChange={handleCtIdSelect}>
-                {
-                  ctList.map((city, index) => (
-                    <option key={index} value={city.ctid}>{city.ctname}</option>
-                  ))
-                }
+              <select value={CtId} onChange={handleCtIdSelect} disabled={!StId}>
+                <option value="">Select City</option>
+                {ctList.map((city, index) => (
+                  <option key={index} value={city.ctid}>{city.ctname}</option>
+                ))}
               </select>
             </td>
           </tr>
           <tr>
             <td>Address</td>
             <td>
-              <input type="text" onChange={handleCAddress} />
+              <input type="text" onChange={handleCAddress} value={CAddress} />
             </td>
           </tr>
           <tr>
@@ -170,7 +176,7 @@ function CustomerReg() {
               Email
             </td>
             <td>
-              <input type="text" onChange={handleCEmail} />
+              <input type="text" onChange={handleCEmail} value={CEmail} />
             </td>
 
           </tr>
@@ -179,18 +185,17 @@ function CustomerReg() {
               Phone
             </td>
             <td>
-              <input type="text" onChange={handleCConatct} />
+              <input type="text" onChange={handleCConatct} value={CConatct} />
             </td>
           </tr>
 
           <tr>
             <td colSpan="2">
               {image.preview && <img src={image.preview} alt="preview" width={100} height={100} />}
-              <input type="file" onChange={handleChange} name="file" />
+              <input type="file" onChange={handleChange} name='file' />
             </td>
           </tr>
           <tr>
-            <td><button type="submit" onClick={handleSubmit} className='btn btn-primary'>Uploads</button></td>
             <td colSpan="2">
               <button type="submit" onClick={handleRegsistration} className='btn btn-primary'>Register</button>
             </td>

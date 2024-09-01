@@ -13,7 +13,9 @@ function Product() {
   const [image, setImage] = useState({ preview: "", data: "" });
   const [PList, setPList] = useState([]);
 
-  const handlePidText = (evt) => setPid(evt.target.value.toUpperCase());
+  const handlePidText = (evt) => {
+    setPid(evt.target.value);
+  };
   const handlePName = (evt) => setPName(evt.target.value);
   const handlePPrice = (evt) => setPPrice(evt.target.value);
   const handleOPrice = (evt) => setOPrice(evt.target.value);
@@ -60,7 +62,7 @@ function Product() {
       .then((res) => {
         alert(res.data);
         console.log(res.data);
-        setPid('');
+        setPid(pid + 1);
         setPName('');
         setPPrice('');
         setOPrice('');

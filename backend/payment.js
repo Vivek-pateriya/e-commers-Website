@@ -2,29 +2,33 @@ require('dotenv').config();
 const express = require('express');
 const router = express.Router();
 const Razorpay = require('razorpay');
-router.post('order/:amt', async (req, res) => {
+
+const razorpayInstance = new Razorpay({
+  key_id: process.env.RAZORPAY_KEY_ID,
+  key_secret: process.env.RAZORPAY_SECRET
+});
+
+
+router.post('/orders/:amt', async (req, res) => {
   try {
-    const instance = new Razorpay({
-      key_id: process.env.RAZORPAY_KEY_ID,
-      key_secret: process.env.RAZORPAY_KEY_SECRET,
-    })
-    const receipt = `receipt_order_${Math.floor(Math.random() * 100000)
-      }`;
     const options = {
-      amount: req.body.amt,
+      amount: req.params.amt,
       currency: "INR",
-      receipt: receipt
-    }
-    const order = await instance.orders.create(options);
-    if (!order) return res.send('some error occured');
+      receipt: `receipt_order_${Math.floor(Math.random() * 100000)}`
+    };
+
+    const order = await razorpayInstance.orders.create(options);
+    if (!order) return res.status(500).send('Some error occurred');
     res.json(order);
+  } catch (error) {
+    console.error('Error creating Razorpay order:', error);
+    res.status(500).send('Some error occurred');
   }
-  catch {
-    res.send('some error occured');
-  }
-})
-router.post('/sucess', async (req, res) => {
-  res.send('payment succesfully Done');
-  res.end();
-})
+});
+
+// Route for handling payment success
+router.post('/success', async (req, res) => {
+  res.send('Payment successfully done');
+});
+
 module.exports = router;
