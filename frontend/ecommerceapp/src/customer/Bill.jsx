@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios'
-import logo from '../Image/logo.avif'
+import logo from '../Images/loginlogo.jpg'
 function Bill(props) {
   const [mydate, setDate] = useState();
   const [custdata, setcustData] = useState();

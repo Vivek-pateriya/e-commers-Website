@@ -2,6 +2,8 @@ import axios from "axios";
 import React, { useState } from "react";
 import ReactDOM from 'react-dom/client';
 import Usermgt from "./usermgt";
+// import { Router } from "react-router-dom";
+import { BrowserRouter as Router } from 'react-router-dom';
 
 function AdminLogin() {
     const [AUSerId, setAUSerId] = useState("");
@@ -36,8 +38,14 @@ function AdminLogin() {
 
                     };
                     console.log(obj2)
+                    // const root = ReactDOM.createRoot(document.getElementById('root'));
+                    // root.render(<Usermgt data={obj2} />);
                     const root = ReactDOM.createRoot(document.getElementById('root'));
-                    root.render(<Usermgt data={obj2} />);
+                    root.render(
+                        <Router>
+                            <Usermgt data={obj2} />
+                        </Router>
+                    );
                 }
             })
             .catch((error) => {

@@ -12,13 +12,13 @@ function CustomerRoutes() {
             </div>
             <nav>
                 <ul>
-                    <li><Link to="/CustomerReg">Register</Link></li>
-                    <li><Link to="/CustomerLogin">Login</Link></li>
+                    <li><Link to="customer/CustomerReg">Register</Link></li>
+                    <li><Link to="customer/CustomerLogin">Login</Link></li>
                 </ul>
             </nav>
             <Routes>
-                <Route path="/CustomerReg" element={<CustomerReg />} />
-                <Route path="/CustomerLogin" element={<CustomerLogin />} />
+                <Route path="customer/CustomerReg" element={<CustomerReg />} />
+                <Route path="customer/CustomerLogin" element={<CustomerLogin />} />
             </Routes>
         </>
     )

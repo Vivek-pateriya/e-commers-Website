@@ -1,7 +1,11 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import '../index.css';
-
+import ReactDom from 'react-dom/client'
+import { Route, Routes, Link } from 'react-router-dom';
+import Citymgt from './CityMgt';
+import StateMgt from './StateMgt';
+import ProductMgt from './ProductMgt';
 function Usermgt() {
     const [Ctlist, setCtList] = useState([]);
     const [Vtlist, setVtList] = useState([]);
@@ -67,7 +71,11 @@ function Usermgt() {
                 alert('Failed to update status.');
             });
     };
+    const handleCityMgt = () => {
+        // const root = ReactDom.createRoot(document.getElementById('root'));
+        // root.render(<Citymgt />);
 
+    };
 
 
 
@@ -182,6 +190,22 @@ function Usermgt() {
                         ))}
                     </tbody>
                 </table>
+                <div>
+                    <nav>
+                        <ul>
+                            <li><Link to="src/adminview/CityMgt">CityMgt</Link></li>
+                            <li><Link to="src/adminview/StateMgt">StateMgt</Link></li>
+                            <li><Link to="src/adminview/ProductMgt">ProductMgt</Link></li>
+                        </ul>
+                    </nav>
+                    <Routes>
+                        <Route path="src/adminview/CityMgt" element={<Citymgt />} />
+                        <Route path="src/adminview/StateMgt" element={<StateMgt />} />
+                        <Route path="src/adminview/ProductMgt" element={<ProductMgt />} />
+                    </Routes>
+
+
+                </div>
             </center>
         </div>
     );

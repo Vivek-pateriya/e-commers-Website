@@ -3,12 +3,6 @@ import AdminReg from './AdminReg';
 import AdminLogin from './AdminLogin';
 import { Route, Routes, Link } from 'react-router-dom';
 import AdminPic from '../Images/Adminpic.jpg'
-import CustomerRoutes from '../customer/customerMain'
-import VenderRoutes from '../venderview/venderRoutes'
-import Citymgt from './CityMgt'
-import Productmgt from './ProductMgt'
-import Statetmgt from './StateMgt'
-
 // import './Admin.css'
 function AdminRoutes() {
     return (
@@ -18,24 +12,13 @@ function AdminRoutes() {
             </div>
             <nav>
                 <ul>
-                    <li><Link to="/AdminReg">Register</Link></li>
-                    <li><Link to="/AdminLogin">Login</Link></li>
-                    <li><Link to="/customer">Customer</Link></li>
-                    <li><Link to="/vender">Vender</Link></li>
-                    <li><Link to='/statemgt'>State Mangment</Link></li>
-                    <li><Link to='/citymgt'>city Mangment</Link></li>
-                    <li><Link to='/productmgt'>product Mangment</Link></li>
-
+                    <li><Link to="adminview/AdminReg">Register</Link></li>
+                    <li><Link to="adminview/AdminLogin">Login</Link></li>
                 </ul>
             </nav>
             <Routes>
-                <Route path="/AdminReg" element={<AdminReg />} />
-                <Route path="/AdminLogin" element={<AdminLogin />} />
-                <Route path="/customer/*" element={<CustomerRoutes />} />
-                <Route path="/vender/*" element={<VenderRoutes />} />
-                <Route path="/statemgt" element={<Statetmgt />} />
-                <Route path="/citymgt" element={<Citymgt />} />
-                <Route path="/productmgt" element={<Productmgt />} />
+                <Route path="adminview/AdminReg" element={<AdminReg />} />
+                <Route path="adminview/AdminLogin" element={<AdminLogin />} />
             </Routes>
         </>)
 }

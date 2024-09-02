@@ -3,7 +3,7 @@ import axios from 'axios';
 import Cart from './cart.png';
 import ReactDOM from 'react-dom/client';
 import '../index.css';
-
+import Bill from '../customer/bill';
 function ProductList(props) {
   const [itemCount, setItemCount] = useState(0);
   const [selectedItems, setSelectedItems] = useState([]);
@@ -23,7 +23,7 @@ function ProductList(props) {
     axios.get('http://localhost:9679/productCat/show')
       .then((res) => {
         setProductCategories(res.data);
-        console.log(productCategories);
+        // console.log(productCategories);
 
       })
       .catch(err => {
@@ -33,7 +33,7 @@ function ProductList(props) {
 
   const handleBuyButton = (productId) => {
     // Find the product to add
-    const product = product.find(item => item.pid === productId);
+    const product = products.find(item => item.pid === productId);
 
     if (product) {
       setSelectedItems(prevItems => [...prevItems, product]);
@@ -51,17 +51,17 @@ function ProductList(props) {
     };
 
     // Assuming you have a Bill component to render
-    // root.render(<Bill data={billData} />);
+    root.render(<Bill data={billData} />);
   };
 
   const getCategoryName = (categoryId) => {
     // Find the category object that matches the given categoryId
-    const category = productCategories.find(citem => citem.
-      productId === categoryId);
+    const category = productCategories.find(citem => citem.productId === categoryId);
 
     // If category is found, return the category name, otherwise return 'Unknown'
-    return category ? category.pcatgname : 'Unknown';
+    return category ? category.productCatg : 'Unknown';
   };
+
 
   return (
     <>
@@ -73,7 +73,7 @@ function ProductList(props) {
           <button type='button' onClick={handleCheckButton}>Checkout</button>
         </div>
         <div className='mydiv'>
-          <table>
+          {/* <table>
             <thead>
               <tr>
                 <th>Id</th>
@@ -102,7 +102,28 @@ function ProductList(props) {
                 </tr>
               ))}
             </tbody>
-          </table>
+          </table> */}
+          <div className='vp-flexbox'>
+            {
+              products.map((item) => (
+                <div class="card" style={{ width: "18rem" }} key={item.pid}>
+                  <img src={`http://localhost:9679/product/getproductimage/${item.ppicname}`} alt={item.pname} width={100} height={200} className="card-img-top" />
+                  <div className="card-body">
+                    <h5 className="card-title">{item.pname}</h5>
+                    <p className="card-text">{item.pid}</p>
+                  </div>
+                  <ul className="list-group list-group-flush">
+                    <li className="list-group-item">price: {item.oprice}</li>
+                    <li className="list-group-item">offer Price : {item.oprice}</li>
+                    <li className="list-group-item">Category: {getCategoryName(item.pcatgid)}</li>
+                  </ul>
+                  <div className="card-body">
+                    <button type="button" onClick={() => handleBuyButton(item.pid)}>Buy</button>
+                  </div>
+                </div>
+              ))
+            }
+          </div>
         </div>
       </center>
     </>

@@ -2,7 +2,7 @@ import React from 'react';
 import VenderReg from './venderReg';
 import VenderLogin from './venderLogin';
 import { Route, Routes, Link } from 'react-router-dom';
-import venderPic from '../Images/loginlogo.jpg'
+import venderPic from '../Images/venderlogo.jpeg'
 import './vender.css'
 function VenderRoutes() {
     return (
@@ -12,13 +12,13 @@ function VenderRoutes() {
             </div>
             <nav>
                 <ul>
-                    <li><Link to="/venderReg">Register</Link></li>
-                    <li><Link to="/venderLogin">Login</Link></li>
+                    <li><Link to="venderview/venderReg">Register</Link></li>
+                    <li><Link to="venderview/venderLogin">Login</Link></li>
                 </ul>
             </nav>
             <Routes>
-                <Route path="/venderReg" element={<VenderReg />} />
-                <Route path="/venderLogin" element={<VenderLogin />} />
+                <Route path="venderview/venderReg" element={<VenderReg />} />
+                <Route path="venderview/venderLogin" element={<VenderLogin />} />
             </Routes>
         </>)
 }

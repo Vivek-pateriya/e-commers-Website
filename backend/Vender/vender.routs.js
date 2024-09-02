@@ -20,6 +20,9 @@ VenderRoute.post('/regsiter', (req, res) => {
 VenderRoute.post('/login', (req, res) => {
   const id = req.body.VUSerId;
   const password = req.body.VUserPass;
+  console.log(req.body.VUSerId);
+  console.log(req.body.VUserPass);
+  console.log(req.body.VStatus);
 
   Vender.findOne({ VUSerId: id, VUserPass: password, VStatus: 'active' })
     .then(cust => {

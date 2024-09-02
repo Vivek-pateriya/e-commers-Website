@@ -20,6 +20,10 @@ customerRoute.post('/regsiter', (req, res) => {
 customerRoute.post('/login', (req, res) => {
   const id = req.body.CUSerId;
   const password = req.body.CUserPass;
+  console.log(req.body.CUSerId);
+  console.log(req.body.CUserPass);
+  console.log(req.body.CStatus);
+
 
 
   Customer.findOne({ CUSerId: id, CUserPass: password, CStatus: 'active' })
