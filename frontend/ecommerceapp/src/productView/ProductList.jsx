@@ -33,7 +33,7 @@ function ProductList(props) {
 
   const handleBuyButton = (productId) => {
     // Find the product to add
-    const product = products.find(item => item.pid === productId);
+    const product = product.find(item => item.pid === productId);
 
     if (product) {
       setSelectedItems(prevItems => [...prevItems, product]);

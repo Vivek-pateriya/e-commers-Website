@@ -11,6 +11,7 @@ import CustomerHome from './customer/CustomerHome';
 import CustomerLogin from './customer/CustomerLogin';
 import CustomerRegister from './customer/CustomerReg';
 import CustomerRoutes from './customer/customerMain';
+import AdminRoutes from './adminView/AdminMain';
 function App() {
   return (
     <div >
@@ -18,11 +19,12 @@ function App() {
       {/* <Citymgt></Citymgt> */}
       {/* <ProducrMgt></ProducrMgt> */}
       {/* <Product></Product> */}
-      <ProductList></ProductList>
+      {/* <ProductList></ProductList> */}
       {/* <CustomerRegister></CustomerRegister> */}
-      {/* <Router>
-        <CustomerRoutes></CustomerRoutes>
-      </Router> */}
+      <Router>
+        {/* <CustomerRoutes></CustomerRoutes> */}
+        <AdminRoutes></AdminRoutes>
+      </Router>
 
     </div>
   );
