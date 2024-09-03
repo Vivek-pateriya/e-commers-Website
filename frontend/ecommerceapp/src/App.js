@@ -1,7 +1,8 @@
 import logo from './logo.svg';
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css'
-import { BrowserRouter as Router } from 'react-router-dom';
+import 'bootstrap/dist/js/bootstrap.min.js'
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import StateMgt from './adminView/StateMgt';
 import Citymgt from './adminView/CityMgt';
 import ProducrMgt from './adminView/ProductMgt';
@@ -13,6 +14,7 @@ import CustomerRegister from './customer/CustomerReg';
 import CustomerRoutes from './customer/customerMain';
 import AdminRoutes from './adminView/AdminMain';
 import HomePage from './Home/HomePage';
+import AdminMgtRoute from './adminView/AdminMgtRoute';
 function App() {
   return (
     <div >
@@ -26,7 +28,9 @@ function App() {
         {/* <CustomerRoutes></CustomerRoutes> */}
         {/* <AdminRoutes></AdminRoutes> */}
         <HomePage></HomePage>
+        {/* <AdminMgtRoute></AdminMgtRoute> */}
       </Router>
+
 
     </div>
   );

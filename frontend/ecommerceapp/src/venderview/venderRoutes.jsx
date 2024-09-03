@@ -17,8 +17,8 @@ function VenderRoutes() {
                 </ul>
             </nav>
             <Routes>
-                <Route path="venderview/venderReg" element={<VenderReg />} />
-                <Route path="venderview/venderLogin" element={<VenderLogin />} />
+                <Route path="venderview/venderReg/*" element={<VenderReg />} />
+                <Route path="venderview/venderLogin/*" element={<VenderLogin />} />
             </Routes>
         </>)
 }

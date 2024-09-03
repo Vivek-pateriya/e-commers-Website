@@ -6,6 +6,8 @@ import CustomerHome from "./CustomerHome";
 function CustomerLogin() {
   const [CUSerId, setCUSerId] = useState("");
   const [CUserPass, setCUserPass] = useState("");
+  const [isLoggedIn, setIsLoggedIn] = useState(false); // Track login status
+  const [userData, setUserData] = useState(null); // Store user data after login
 
   const handleCUSerId = (evt) => {
     setCUSerId(evt.target.value);
@@ -36,8 +38,10 @@ function CustomerLogin() {
 
           };
           console.log(obj2)
-          const root = ReactDOM.createRoot(document.getElementById('root'));
-          root.render(<CustomerHome data={obj2} />);
+          // const root = ReactDOM.createRoot(document.getElementById('root'));
+          // root.render(<CustomerHome data={obj2} />);
+          setUserData(obj2);
+          setIsLoggedIn(true);
         }
       })
       .catch((error) => {
@@ -45,6 +49,10 @@ function CustomerLogin() {
         alert('An error occurred during login. Please try again.');
       });
   };
+  if (isLoggedIn && userData) {
+    // Render the Usermgt component if logged in
+    return <CustomerHome data={userData} />;
+  }
 
   return (
     <div className="container">

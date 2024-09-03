@@ -6,6 +6,8 @@ import VenderHome from "./venderHome";
 function VenderLogin() {
     const [VUSerId, setVUSerId] = useState("");
     const [VUserPass, setVUserPass] = useState("");
+    const [isLoggedIn, setIsLoggedIn] = useState(false); // Track login status
+    const [userData, setUserData] = useState(null); // Store user data after login
 
     const handleVUSerId = (evt) => {
         setVUSerId(evt.target.value);
@@ -35,9 +37,11 @@ function VenderLogin() {
                         vid: res.data.Vid
 
                     };
-                    console.log(obj2)
-                    const root = ReactDOM.createRoot(document.getElementById('root'));
-                    root.render(<VenderHome data={obj2} />);
+                    console.log(obj2);
+                    // const root = ReactDOM.createRoot(document.getElementById('root'));
+                    // root.render(<VenderHome data={obj2} />);
+                    setUserData(obj2);
+                    setIsLoggedIn(true);
                 }
             })
             .catch((error) => {
@@ -45,6 +49,11 @@ function VenderLogin() {
                 alert('An error occurred during login. Please try again.');
             });
     };
+    if (isLoggedIn && userData) {
+        return (
+            <VenderHome data={userData} />
+        );
+    }
 
     return (
         <div className="container">

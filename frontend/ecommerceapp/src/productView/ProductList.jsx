@@ -9,6 +9,8 @@ function ProductList(props) {
   const [selectedItems, setSelectedItems] = useState([]);
   const [productCategories, setProductCategories] = useState([]);
   const [products, setProducts] = useState([]);
+  const [clickedCheckout, setClickedCheckout] = useState(false);
+  const [billData, setBillData] = useState([]);
 
   // Fetch product and category lists on component mount
   useEffect(() => {
@@ -42,16 +44,17 @@ function ProductList(props) {
   };
 
   const handleCheckButton = () => {
-    const root = ReactDOM.createRoot(document.getElementById('root'));
+    // const root = ReactDOM.createRoot(document.getElementById('root'));
     const { data: customerId } = props;
 
-    const billData = {
+    const billDataobj = {
       selectedItems,
       customerId
     };
-
+    setBillData(billDataobj);
+    setClickedCheckout(true);
     // Assuming you have a Bill component to render
-    root.render(<Bill data={billData} />);
+    // root.render(<Bill data={billData} />);
   };
 
   const getCategoryName = (categoryId) => {
@@ -61,7 +64,9 @@ function ProductList(props) {
     // If category is found, return the category name, otherwise return 'Unknown'
     return category ? category.productCatg : 'Unknown';
   };
-
+  if (clickedCheckout) {
+    return <Bill data={billData} />
+  }
 
   return (
     <>

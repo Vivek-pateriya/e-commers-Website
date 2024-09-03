@@ -7,19 +7,21 @@ import AdminPic from '../Images/Adminpic.jpg'
 function AdminRoutes() {
     return (
         <>
-            <div className="container">
-                <img src={AdminPic} alt="" height={300} width={1000} />
+            <div id="root2">
+                <div className="container" >
+                    <img src={AdminPic} alt="" height={300} width={1000} />
+                </div>
+                <nav>
+                    <ul>
+                        <li><Link to="adminaeg">Register</Link></li>
+                        <li><Link to="adminlogin">Login</Link></li>
+                    </ul>
+                </nav>
+                <Routes>
+                    <Route path="/adminreg/*" element={<AdminReg />} />
+                    <Route path="/adminlogin/*" element={<AdminLogin />} />
+                </Routes>
             </div>
-            <nav>
-                <ul>
-                    <li><Link to="adminview/AdminReg">Register</Link></li>
-                    <li><Link to="adminview/AdminLogin">Login</Link></li>
-                </ul>
-            </nav>
-            <Routes>
-                <Route path="adminview/AdminReg" element={<AdminReg />} />
-                <Route path="adminview/AdminLogin" element={<AdminLogin />} />
-            </Routes>
         </>)
 }
 export default AdminRoutes;

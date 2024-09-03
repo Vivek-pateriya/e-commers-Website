@@ -1,16 +1,21 @@
-import React from "react";
+import React, { useState } from "react";
 import ProductList from '../productView/ProductList'
 import ReactDom from 'react-dom/client'
 function CustomerHome(props) {
+  const [clicked, setClicked] = useState(false);
+  const [cid, setCid] = useState();
   const handleShoppingButton = () => {
-    const root = ReactDom.createRoot(
-      document.getElementById('root')
-    )
+    // const root = ReactDom.createRoot(
+    //   document.getElementById('root')
+    // )
     console.log(props.data)
-    var cid = props.data.cid;
-    root.render(<ProductList data={cid} />)
+    setCid(props.data.cid);
+    setClicked(true);
+    // root.render(<ProductList data={cid} />)
   }
-
+  if (clicked === true) {
+    return <ProductList data={cid} />
+  }
   return (
     <div>
 

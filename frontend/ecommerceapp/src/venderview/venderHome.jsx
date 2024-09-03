@@ -1,16 +1,23 @@
-import React from "react";
+import React, { useState } from "react";
 import Product from '../productView/Product'
 import ReactDom from 'react-dom/client'
 function VenderHome(props) {
+    const [clicked, setClicked] = useState(false);
+    const [vid, setVid] = useState();
     const handleShoppingButton = () => {
-        const root = ReactDom.createRoot(
-            document.getElementById('root')
-        )
-        console.log(props.data)
-        var vid = props.data.vid;
-        root.render(<Product data={vid} />)
-    }
+        // const root = ReactDom.createRoot(
+        //     document.getElementById('root')
+        // )
 
+        console.log(props.data)
+        setVid(props.data.vid);
+        setVid(props.data.cid);
+        setClicked(true);
+        // root.render(<Product data={vid} />)
+    }
+    if (clicked === true) {
+        return <Product data={vid} />
+    }
     return (
         <div>
 
