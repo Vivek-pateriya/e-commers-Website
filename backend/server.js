@@ -12,6 +12,7 @@ const customer = require('./Customer/customer.route');
 const paymentRoute = require('./payment');
 const venderRoute = require('./Vender/vender.routs');
 const adminRoute = require('./Admin/admin.route');
+const bill = require('./Admin/Bills/bill.route');
 
 app.use(cors());
 app.use(express.json());
@@ -25,6 +26,7 @@ app.use('/customer', customer);
 app.use('/payment', paymentRoute);
 app.use('/vender', venderRoute);
 app.use('/admin', adminRoute);
+app.use('/bill', bill);
 
 
 mongoose.connect(config.URL).then(() => {

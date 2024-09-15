@@ -27,7 +27,7 @@ productRoute.route('/showproduct').get((req, res) => {
 // Save Product Image
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
-    cb(null, path.join(__dirname, 'productimage')); // Fixed path concatenation
+    cb(null, path.join(__dirname, 'E:/BalramSircode/Project/e-commers-Website/backend/product/productimage')); // Fixed path concatenation
   },
   filename: (req, file, cb) => {
     cb(null, file.originalname);
@@ -72,4 +72,5 @@ productRoute.get('/getmaxpid', (req, res) => {
     res.send(err);
   });
 });
+
 module.exports = productRoute;

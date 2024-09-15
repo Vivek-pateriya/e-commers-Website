@@ -18,10 +18,10 @@ export default function AdminMgtRoute() {
       </nav>
 
       <Routes>
-        <Route path="/citymgt" element={<Citymgt />} />
-        <Route path="/statemgt" element={<StateMgt />} />
-        <Route path="/productmgt" element={<ProductMgt />} />
-        <Route path="/usermgt" element={<Usermgt />} />
+        <Route path="/citymgt/*" element={<Citymgt />} />
+        <Route path="/statemgt/*" element={<StateMgt />} />
+        <Route path="/productmgt/*" element={<ProductMgt />} />
+        <Route path="/usermgt/*" element={<Usermgt />} />
       </Routes>
     </>
   );
