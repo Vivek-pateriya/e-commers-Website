@@ -1,8 +1,14 @@
 import { render, screen } from '@testing-library/react';
 import App from './App';
 
-test('renders learn react link', () => {
+jest.mock('axios', () => ({
+  get: jest.fn(() => Promise.resolve({ data: [] })),
+  post: jest.fn(() => Promise.resolve({ data: '' })),
+}));
+
+test('renders the main account links', () => {
   render(<App />);
-  const linkElement = screen.getByText(/learn react/i);
-  expect(linkElement).toBeInTheDocument();
+  expect(screen.getByRole('link', { name: /admin/i })).toBeInTheDocument();
+  expect(screen.getByRole('link', { name: /customer/i })).toBeInTheDocument();
+  expect(screen.getByRole('link', { name: /vender/i })).toBeInTheDocument();
 });
