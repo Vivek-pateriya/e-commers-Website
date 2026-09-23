@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import Cart from './cart.png';
-import ReactDOM from 'react-dom/client';
 import '../index.css';
-import Bill from '../customer/bill';
+import Bill from '../customer/Bill';
 function ProductList(props) {
   const [itemCount, setItemCount] = useState(0);
   const [selectedItems, setSelectedItems] = useState([]);
@@ -111,7 +110,7 @@ function ProductList(props) {
           <div className='vp-flexbox'>
             {
               products.map((item) => (
-                <div class="card" style={{ width: "18rem" }} key={item.pid}>
+                <div className="card" style={{ width: "18rem" }} key={item.pid}>
                   <img src={`http://localhost:9679/product/getproductimage/${item.ppicname}`} alt={item.pname} width={100} height={200} className="card-img-top" />
                   <div className="card-body">
                     <h5 className="card-title">{item.pname}</h5>
